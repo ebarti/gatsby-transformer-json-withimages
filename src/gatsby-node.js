@@ -70,10 +70,11 @@ async function onCreateNode(
   }
 
   function processImages(data) {
-    _.forOwn(data, function (val, key) {
+    _.forOwn(data, function (key) {
       if (_.isObject(data[key])) {
         processImages(data[key]);
       } else {
+        const val = String(data[key]);
         if (val.endsWith(".png") || val.endsWith(".svg") || val.endsWith(".jpeg") || val.endsWith(".jpg")) {
           data[key + "-image"] = createImageNode(val);
         }

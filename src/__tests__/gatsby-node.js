@@ -9,10 +9,12 @@ const loadNodeContent = node => Promise.resolve(node.content)
 const bootstrapTest = async (node, pluginOptions = {}) => {
   const createNode = jest.fn()
   const createParentChildLink = jest.fn()
+
   const actions = { createNode, createParentChildLink }
   const createNodeId = jest.fn()
   createNodeId.mockReturnValue(`uuid-from-gatsby`)
   const createContentDigest = jest.fn().mockReturnValue(`contentDigest`)
+
 
   return await onCreateNode(
     {
@@ -62,8 +64,8 @@ describe(`Process JSON nodes correctly`, () => {
 
   it(`correctly creates nodes from JSON which is an array of objects`, async () => {
     const data = [
-      { id: `foo`, blue: true, funny: `yup` },
-      { blue: false, funny: `nope` },
+      { id: `foo`, blue: true, funny: `yup`, img: "./data/Gatsby-Logo.svg" },
+      { blue: false, funny: `nope`, c: "./data/Gatsby-Logo.svg"  },
     ]
     const node = {
       ...baseFileNode,
@@ -79,7 +81,7 @@ describe(`Process JSON nodes correctly`, () => {
   })
 
   it(`correctly creates a node from JSON which is a single object`, async () => {
-    const data = { id: `foo`, blue: true, funny: `yup` }
+    const data = { id: `foo`, blue: true, funny: `yup`, img: "./data/Gatsby-Logo.svg" }
     const node = {
       ...baseFileNode,
       content: JSON.stringify(data),

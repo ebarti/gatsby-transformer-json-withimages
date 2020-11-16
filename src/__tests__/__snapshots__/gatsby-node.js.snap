@@ -36,7 +36,7 @@ Array [
       "parent": Object {
         "children": Array [],
         "content": "{\\"id\\":12345,\\"blue\\":true,\\"funny\\":\\"yup\\"}",
-        "dir": "<TEMP_DIR>/foo/",
+        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
@@ -59,6 +59,7 @@ Array [
       "children": Array [],
       "funny": "yup",
       "id": "foo",
+      "img": "./data/Gatsby-Logo.svg",
       "internal": Object {
         "contentDigest": "contentDigest",
         "type": "FooJson",
@@ -78,6 +79,7 @@ Array [
         "children": Array [],
         "funny": "yup",
         "id": "foo",
+        "img": "./data/Gatsby-Logo.svg",
         "internal": Object {
           "contentDigest": "contentDigest",
           "type": "FooJson",
@@ -86,8 +88,8 @@ Array [
       },
       "parent": Object {
         "children": Array [],
-        "content": "{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\"}",
-        "dir": "<TEMP_DIR>/foo/",
+        "content": "{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.svg\\"}",
+        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
@@ -159,6 +161,7 @@ Array [
       "children": Array [],
       "funny": "yup",
       "id": "foo",
+      "img": "./data/Gatsby-Logo.svg",
       "internal": Object {
         "contentDigest": "contentDigest",
         "type": "NodeNameJson",
@@ -169,6 +172,7 @@ Array [
   Array [
     Object {
       "blue": false,
+      "c": "./data/Gatsby-Logo.svg",
       "children": Array [],
       "funny": "nope",
       "id": "uuid-from-gatsby",
@@ -191,6 +195,7 @@ Array [
         "children": Array [],
         "funny": "yup",
         "id": "foo",
+        "img": "./data/Gatsby-Logo.svg",
         "internal": Object {
           "contentDigest": "contentDigest",
           "type": "NodeNameJson",
@@ -199,8 +204,8 @@ Array [
       },
       "parent": Object {
         "children": Array [],
-        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\"}]",
-        "dir": "<TEMP_DIR>/foo/",
+        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.svg\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\",\\"c\\":\\"./data/Gatsby-Logo.svg\\"}]",
+        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
@@ -216,6 +221,7 @@ Array [
     Object {
       "child": Object {
         "blue": false,
+        "c": "./data/Gatsby-Logo.svg",
         "children": Array [],
         "funny": "nope",
         "id": "uuid-from-gatsby",
@@ -227,8 +233,8 @@ Array [
       },
       "parent": Object {
         "children": Array [],
-        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\"}]",
-        "dir": "<TEMP_DIR>/foo/",
+        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.svg\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\",\\"c\\":\\"./data/Gatsby-Logo.svg\\"}]",
+        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
