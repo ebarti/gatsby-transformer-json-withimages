@@ -1,4 +1,5 @@
-const _ = require(`lodash`)
+const forOwn = require(`lodash.forown`);
+const isObject = require(`lodash.isobject`)
 const path = require(`path`)
 
 function unstable_shouldOnCreateNode({ node }) {
@@ -30,86 +31,87 @@ async function onCreateNode(
 
   function transformObject(obj, id, type) {
     processImages(obj);
-    const jsonNode = {
-      ...obj,
+    const jsonNode = { ...obj,
       id,
       children: [],
       parent: node.id,
       internal: {
         contentDigest: createContentDigest(obj),
-        type,
-      },
-    }
-    createNode(jsonNode)
-    createParentChildLink({ parent: node, child: jsonNode })
+        type
+      }
+    };
+    createNode(jsonNode);
+    createParentChildLink({
+      parent: node,
+      child: jsonNode
+    });
   }
 
   function createImageNode(image, contentType) {
-    const { imageName, ext } = path.parse(image);
+    const {
+      imageName,
+      ext
+    } = path.parse(image);
     const absolutePath = path.normalize(path.join(__dirname, image));
     const data = {
       imageName,
       ext,
       absolutePath,
-      extension: ext.substring(1),
+      extension: ext.substring(1)
     };
-    const imageNode = {
-      ...data,
+    const imageNode = { ...data,
       id: createNodeId(`card-image-${imageName}`),
       internal: {
         type: `jsonImage`,
-        contentDigest: createContentDigest(data),
-      },
+        contentDigest: createContentDigest(data)
+      }
     };
-
     actions.createNode(imageNode);
     return imageNode;
   }
 
   function processImages(data) {
-    _.forOwn(data, function(val, key) {
-      if(_.isObject(data[key])) {
+    forOwn(data, function (val, key) {
+      if (_.isObject(data[key])) {
         processImages(data[key]);
-
       } else {
-        if(val.endsWith(".png") || val.endsWith(".svg") || val.endsWith(".jpeg") || val.endsWith(".jpg")) {
+        if (val.endsWith(".png") || val.endsWith(".svg") || val.endsWith(".jpeg") || val.endsWith(".jpg")) {
           data[key + "-image"] = createImageNode(val);
         }
       }
     });
   }
 
-  const { createNode, createParentChildLink } = actions
+  const {
+    createNode,
+    createParentChildLink
+  } = actions;
+  const content = await loadNodeContent(node);
+  let parsedContent;
 
-  const content = await loadNodeContent(node)
-  let parsedContent
   try {
-    parsedContent = JSON.parse(content)
+    parsedContent = JSON.parse(content);
   } catch {
-    const hint = node.absolutePath
-      ? `file ${node.absolutePath}`
-      : `in node ${node.id}`
-    throw new Error(`Unable to parse JSON: ${hint}`)
+    const hint = node.absolutePath ? `file ${node.absolutePath}` : `in node ${node.id}`;
+    throw new Error(`Unable to parse JSON: ${hint}`);
   }
 
   if (_.isArray(parsedContent)) {
     parsedContent.forEach((obj, i) => {
-      transformObject(
-          obj,
-          obj.id ? String(obj.id) : createNodeId(`${node.id} [${i}] >>> JSON`),
-          getType({ node, object: obj, isArray: true })
-      )
-    })
+      transformObject(obj, obj.id ? String(obj.id) : createNodeId(`${node.id} [${i}] >>> JSON`), getType({
+        node,
+        object: obj,
+        isArray: true
+      }));
+    });
   } else if (_.isPlainObject(parsedContent)) {
-    transformObject(
-      parsedContent,
-      parsedContent.id
-        ? String(parsedContent.id)
-        : createNodeId(`${node.id} >>> JSON`),
-      getType({ node, object: parsedContent, isArray: false })
-    )
+    transformObject(parsedContent, parsedContent.id ? String(parsedContent.id) : createNodeId(`${node.id} >>> JSON`), getType({
+      node,
+      object: parsedContent,
+      isArray: false
+    }));
   }
 }
 
-exports.unstable_shouldOnCreateNode = unstable_shouldOnCreateNode
-exports.onCreateNode = onCreateNode
+exports.unstable_shouldOnCreateNode = unstable_shouldOnCreateNode;
+exports.onCreateNode = onCreateNode;

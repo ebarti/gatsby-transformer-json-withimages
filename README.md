@@ -1,11 +1,20 @@
-# gatsby-transformer-json
+# gatsby-transformer-json-withimages
 
 Parses raw JSON strings into JavaScript objects e.g. from JSON files. Supports
-arrays of objects and single objects.
+arrays of objects and single objects. If a node contains a path to an image, the plugin will attempt 
+to convert said path into an image with the aid of gatsby-image.
+
+## Requirements
+
+```javascript
+
+```
+
+
 
 ## Install
 
-`npm install gatsby-transformer-json`
+`npm install gatsby-transformer-json-withimages `
 
 If you want to transform json files, you also need to have `gatsby-source-filesystem` installed and configured so it
 points to your files.

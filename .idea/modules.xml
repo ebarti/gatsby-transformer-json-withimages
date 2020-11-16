@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/gatsby-transformer-json-withimages.iml" filepath="$PROJECT_DIR$/gatsby-transformer-json-withimages.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../testnodejs/.idea/testnodejs.iml" filepath="$PROJECT_DIR$/../testnodejs/.idea/testnodejs.iml" />
     </modules>
   </component>
 </project>
