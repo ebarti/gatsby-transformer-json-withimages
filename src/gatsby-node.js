@@ -1,5 +1,4 @@
-const forOwn = require(`lodash.forown`);
-const isObject = require(`lodash.isobject`)
+const _ = require(`lodash`);
 const path = require(`path`)
 
 function unstable_shouldOnCreateNode({ node }) {
@@ -71,7 +70,7 @@ async function onCreateNode(
   }
 
   function processImages(data) {
-    forOwn(data, function (val, key) {
+    _.forOwn(data, function (val, key) {
       if (_.isObject(data[key])) {
         processImages(data[key]);
       } else {
