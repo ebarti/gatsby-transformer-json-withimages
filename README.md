@@ -50,7 +50,7 @@ So if your project has a `letters.json` with
 Then the following three nodes would be created:
 
 ```json
-[{ "value": "a", "aimg":  }, { "value": "b" }, { "value": "c" }]
+[{ "value": "a", "aimg": "../../yetAnotherFolder/a.jpg", "aimg-image":  { gatsby image data } }, { "value": "b" , "imgb": "../../yetAnotherFolder/bb.png", "imgb-image": { gatsby image data } }, { "value": "c", "img_c": "../../yetAnotherFolder/c_img.svg", "img_c-image": { gatsby image data } }]
 ```
 
 ### Single Object
@@ -62,7 +62,7 @@ parent directory.
 For example, let's say your project has a data layout like:
 
 ```text
-data/
+src/
     letters/
         a.json
         b.json
@@ -73,14 +73,21 @@ Where each of `a.json` and `b.json` look like:
 ```json
 { 
   "value": "a",
-  "aImage": "../../yetAnotherFolder/a.jpg"
+  "aimg": "../../yetAnotherFolder/a.jpg"
 }
 ```
 
 ```json
 { 
   "value": "b",
-  "bImage": "../../yetAnotherFolder/bimg.png"
+  "imgb": "../../yetAnotherFolder/bb.png"
+}
+```
+
+```json
+{
+  "value": "c", 
+  "img_c": "../../yetAnotherFolder/c_img.svg"
 }
 ```
 
@@ -89,13 +96,25 @@ Then the following three nodes would be created:
 ```json
 [
   {
-    "value": "a"
+    "value": "a",
+    "aimg": "../../yetAnotherFolder/a.jpg", 
+    "aimg-image":  { 
+            gatsby image data 
+        }
   },
   {
-    "value": "b"
+    "value": "b",
+    "imgb": "../../yetAnotherFolder/bb.png", 
+    "imgb-image": { 
+            gatsby image data 
+        }
   },
   {
-    "value": "c"
+    "value": "c",
+    "img_c": "../../yetAnotherFolder/c_img.svg", 
+    "img_c-image": { 
+            gatsby image data 
+        }
   }
 ]
 ```
