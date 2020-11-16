@@ -29,6 +29,7 @@ async function onCreateNode(
   }
 
   function transformObject(obj, id, type) {
+    processImages(obj);
     const jsonNode = {
       ...obj,
       id,
@@ -43,8 +44,39 @@ async function onCreateNode(
     createParentChildLink({ parent: node, child: jsonNode })
   }
 
-  function iterateRecursively(data) {
+  function createImageNode(image, contentType) {
+    const { imageName, ext } = path.parse(image);
+    const absolutePath = path.normalize(path.join(__dirname, image));
+    const data = {
+      imageName,
+      ext,
+      absolutePath,
+      extension: ext.substring(1),
+    };
+    const imageNode = {
+      ...data,
+      id: createNodeId(`card-image-${imageName}`),
+      internal: {
+        type: `jsonImage`,
+        contentDigest: createContentDigest(data),
+      },
+    };
 
+    actions.createNode(imageNode);
+    return imageNode;
+  }
+
+  function processImages(data) {
+    _.forOwn(data, function(val, key) {
+      if(_.isObject(data[key])) {
+        processImages(data[key]);
+
+      } else {
+        if(val.endsWith(".png") || val.endsWith(".svg") || val.endsWith(".jpeg") || val.endsWith(".jpg")) {
+          data[key + "-image"] = createImageNode(val);
+        }
+      }
+    });
   }
 
   const { createNode, createParentChildLink } = actions
@@ -61,7 +93,13 @@ async function onCreateNode(
   }
 
   if (_.isArray(parsedContent)) {
-
+    parsedContent.forEach((obj, i) => {
+      transformObject(
+          obj,
+          obj.id ? String(obj.id) : createNodeId(`${node.id} [${i}] >>> JSON`),
+          getType({ node, object: obj, isArray: true })
+      )
+    })
   } else if (_.isPlainObject(parsedContent)) {
     transformObject(
       parsedContent,
