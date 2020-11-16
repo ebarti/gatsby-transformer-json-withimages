@@ -244,9 +244,6 @@ module.exports = {
 }
 ```
 
-## Examples
-
-The [gatsbygram example site](https://github.com/gatsbyjs/gatsby/blob/master/examples/gatsbygram/gatsby-node.js) uses this plugin.
 
 ## Troubleshooting
 
