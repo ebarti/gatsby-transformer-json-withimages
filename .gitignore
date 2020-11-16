@@ -1,2 +1,4 @@
 /gatsby-node.js
 gatsby-transformer-json-withimages.iml
+node_modules/
+.idea/
