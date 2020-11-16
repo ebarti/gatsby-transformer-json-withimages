@@ -70,7 +70,7 @@ async function onCreateNode(
   }
 
   function processImages(data) {
-    _.forOwn(data, function (key) {
+    _.forOwn(data, function (value, key) {
       if (_.isObject(data[key])) {
         processImages(data[key]);
       } else {

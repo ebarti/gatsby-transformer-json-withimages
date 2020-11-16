@@ -75,7 +75,7 @@ describe(`Process JSON nodes correctly`, () => {
     return bootstrapTest(node).then(({ createNode, createParentChildLink }) => {
       expect(createNode.mock.calls).toMatchSnapshot()
       expect(createParentChildLink.mock.calls).toMatchSnapshot()
-      expect(createNode).toHaveBeenCalledTimes(2)
+      expect(createNode).toHaveBeenCalledTimes(4)
       expect(createParentChildLink).toHaveBeenCalledTimes(2)
     })
   })
@@ -90,7 +90,7 @@ describe(`Process JSON nodes correctly`, () => {
     return bootstrapTest(node).then(({ createNode, createParentChildLink }) => {
       expect(createNode.mock.calls).toMatchSnapshot()
       expect(createParentChildLink.mock.calls).toMatchSnapshot()
-      expect(createNode).toHaveBeenCalledTimes(1)
+      expect(createNode).toHaveBeenCalledTimes(2)
       expect(createParentChildLink).toHaveBeenCalledTimes(1)
     })
   })
