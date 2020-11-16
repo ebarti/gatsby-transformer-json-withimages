@@ -43,6 +43,10 @@ async function onCreateNode(
     createParentChildLink({ parent: node, child: jsonNode })
   }
 
+  function iterateRecursively(data) {
+
+  }
+
   const { createNode, createParentChildLink } = actions
 
   const content = await loadNodeContent(node)
@@ -57,13 +61,7 @@ async function onCreateNode(
   }
 
   if (_.isArray(parsedContent)) {
-    parsedContent.forEach((obj, i) => {
-      transformObject(
-        obj,
-        obj.id ? String(obj.id) : createNodeId(`${node.id} [${i}] >>> JSON`),
-        getType({ node, object: obj, isArray: true })
-      )
-    })
+
   } else if (_.isPlainObject(parsedContent)) {
     transformObject(
       parsedContent,
