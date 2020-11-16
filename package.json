@@ -21,7 +21,8 @@
   "keywords": [
     "gatsby",
     "gatsby-plugin",
-    "json"
+    "json",
+    "images"
   ],
   "license": "MIT",
   "peerDependencies": {

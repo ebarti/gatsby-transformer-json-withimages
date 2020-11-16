@@ -4,20 +4,15 @@ Parses raw JSON strings into JavaScript objects e.g. from JSON files. Supports
 arrays of objects and single objects. If a node contains a path to an image, the plugin will attempt 
 to convert said path into an image with the aid of gatsby-image.
 
-## Requirements
-
-```javascript
-
-```
-
-
 
 ## Install
 
 `npm install gatsby-transformer-json-withimages `
 
-If you want to transform json files, you also need to have `gatsby-source-filesystem` installed and configured so it
-points to your files.
+If you want to transform json files, you also need to have `gatsby-transformer-json` installed and configured so it
+points to the directory (or directories) you want the json (with images) transformed.
+
+
 
 ## How to use
 
@@ -26,11 +21,11 @@ In your `gatsby-config.js`:
 ```javascript
 module.exports = {
   plugins: [
-    `gatsby-transformer-json`,
+    `gatsby-transformer-json-withimages`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `./src/data/`,
+        path: path.join(__dirname, `randomFolder`, `someOtherFolder`, `yetAnotherFolder`,`canBeNestedManyTimes`),
       },
     },
   ],
@@ -49,13 +44,13 @@ The algorithm for arrays is to convert each item in the array into a node.
 So if your project has a `letters.json` with
 
 ```json
-[{ "value": "a" }, { "value": "b" }, { "value": "c" }]
+[{ "value": "a", "aimg":   "../../yetAnotherFolder/a.jpg"}, { "value": "b" , "bimg": "../../yetAnotherFolder/bimg.png" }, { "value": "c", "imgc": "../../yetAnotherFolder/c_img.svg" }]
 ```
 
 Then the following three nodes would be created:
 
 ```json
-[{ "value": "a" }, { "value": "b" }, { "value": "c" }]
+[{ "value": "a", "aimg":  }, { "value": "b" }, { "value": "c" }]
 ```
 
 ### Single Object
@@ -71,21 +66,22 @@ data/
     letters/
         a.json
         b.json
-        c.json
 ```
 
-Where each of `a.json`, `b.json` and `c.json` look like:
+Where each of `a.json` and `b.json` look like:
 
 ```json
-{ "value": "a" }
-```
-
-```json
-{ "value": "b" }
+{ 
+  "value": "a",
+  "aImage": "../../yetAnotherFolder/a.jpg"
+}
 ```
 
 ```json
-{ "value": "c" }
+{ 
+  "value": "b",
+  "bImage": "../../yetAnotherFolder/bimg.png"
+}
 ```
 
 Then the following three nodes would be created:
