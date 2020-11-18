@@ -1,6 +1,6 @@
 const Promise = require(`bluebird`)
 const os = require(`os`)
-
+const path = require(`path`)
 const { onCreateNode } = require(`../gatsby-node`)
 
 // Make some fake functions its expecting.
@@ -47,7 +47,8 @@ describe(`Process JSON nodes correctly`, () => {
   const baseFileNode = {
     ...baseNode,
     name: `nodeName`,
-    dir: `${os.tmpdir()}/foo/`,
+    absolutePath: path.resolve(__dirname),
+    dir: path.resolve(__dirname),
     internal: {
       ...baseNode.internal,
       type: `File`,
@@ -64,8 +65,8 @@ describe(`Process JSON nodes correctly`, () => {
 
   it(`correctly creates nodes from JSON which is an array of objects`, async () => {
     const data = [
-      { id: `foo`, blue: true, funny: `yup`, img: "./data/Gatsby-Logo.svg" },
-      { blue: false, funny: `nope`, c: "./data/Gatsby-Logo.svg"  },
+      { id: `foo`, blue: true, funny: `yup`, img: "./data/Gatsby-Logo.png" },
+      { blue: false, funny: `nope`, c: "./data/Gatsby-Logo.png"  },
     ]
     const node = {
       ...baseFileNode,
@@ -81,7 +82,7 @@ describe(`Process JSON nodes correctly`, () => {
   })
 
   it(`correctly creates a node from JSON which is a single object`, async () => {
-    const data = { id: `foo`, blue: true, funny: `yup`, img: "./data/Gatsby-Logo.svg" }
+    const data = { id: `foo`, blue: true, funny: `yup`, img: "./data/Gatsby-Logo.png" }
     const node = {
       ...baseFileNode,
       content: JSON.stringify(data),

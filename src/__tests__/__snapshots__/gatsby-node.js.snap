@@ -10,7 +10,7 @@ Array [
       "id": "12345",
       "internal": Object {
         "contentDigest": "contentDigest",
-        "type": "FooJson",
+        "type": "TestsJson",
       },
       "parent": "whatever",
     },
@@ -29,14 +29,15 @@ Array [
         "id": "12345",
         "internal": Object {
           "contentDigest": "contentDigest",
-          "type": "FooJson",
+          "type": "TestsJson",
         },
         "parent": "whatever",
       },
       "parent": Object {
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "children": Array [],
         "content": "{\\"id\\":12345,\\"blue\\":true,\\"funny\\":\\"yup\\"}",
-        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
+        "dir": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
@@ -55,15 +56,15 @@ exports[`Process JSON nodes correctly correctly creates a node from JSON which i
 Array [
   Array [
     Object {
-      "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-      "ext": ".svg",
-      "extension": "svg",
+      "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+      "ext": ".png",
+      "extension": "png",
       "id": "uuid-from-gatsby",
-      "imageName": undefined,
       "internal": Object {
         "contentDigest": "contentDigest",
-        "type": "jsonImage",
+        "type": "JsonNameImageCard",
       },
+      "name": "Gatsby-Logo",
     },
   ],
   Array [
@@ -72,21 +73,21 @@ Array [
       "children": Array [],
       "funny": "yup",
       "id": "foo",
-      "img": "./data/Gatsby-Logo.svg",
+      "img": "./data/Gatsby-Logo.png",
       "img-image": Object {
-        "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-        "ext": ".svg",
-        "extension": "svg",
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+        "ext": ".png",
+        "extension": "png",
         "id": "uuid-from-gatsby",
-        "imageName": undefined,
         "internal": Object {
           "contentDigest": "contentDigest",
-          "type": "jsonImage",
+          "type": "JsonNameImageCard",
         },
+        "name": "Gatsby-Logo",
       },
       "internal": Object {
         "contentDigest": "contentDigest",
-        "type": "FooJson",
+        "type": "TestsJson",
       },
       "parent": "whatever",
     },
@@ -103,28 +104,29 @@ Array [
         "children": Array [],
         "funny": "yup",
         "id": "foo",
-        "img": "./data/Gatsby-Logo.svg",
+        "img": "./data/Gatsby-Logo.png",
         "img-image": Object {
-          "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-          "ext": ".svg",
-          "extension": "svg",
+          "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+          "ext": ".png",
+          "extension": "png",
           "id": "uuid-from-gatsby",
-          "imageName": undefined,
           "internal": Object {
             "contentDigest": "contentDigest",
-            "type": "jsonImage",
+            "type": "JsonNameImageCard",
           },
+          "name": "Gatsby-Logo",
         },
         "internal": Object {
           "contentDigest": "contentDigest",
-          "type": "FooJson",
+          "type": "TestsJson",
         },
         "parent": "whatever",
       },
       "parent": Object {
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "children": Array [],
-        "content": "{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.svg\\"}",
-        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
+        "content": "{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.png\\"}",
+        "dir": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
@@ -192,15 +194,15 @@ exports[`Process JSON nodes correctly correctly creates nodes from JSON which is
 Array [
   Array [
     Object {
-      "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-      "ext": ".svg",
-      "extension": "svg",
+      "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+      "ext": ".png",
+      "extension": "png",
       "id": "uuid-from-gatsby",
-      "imageName": undefined,
       "internal": Object {
         "contentDigest": "contentDigest",
-        "type": "jsonImage",
+        "type": "JsonNameImageCard",
       },
+      "name": "Gatsby-Logo",
     },
   ],
   Array [
@@ -209,17 +211,17 @@ Array [
       "children": Array [],
       "funny": "yup",
       "id": "foo",
-      "img": "./data/Gatsby-Logo.svg",
+      "img": "./data/Gatsby-Logo.png",
       "img-image": Object {
-        "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-        "ext": ".svg",
-        "extension": "svg",
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+        "ext": ".png",
+        "extension": "png",
         "id": "uuid-from-gatsby",
-        "imageName": undefined,
         "internal": Object {
           "contentDigest": "contentDigest",
-          "type": "jsonImage",
+          "type": "JsonNameImageCard",
         },
+        "name": "Gatsby-Logo",
       },
       "internal": Object {
         "contentDigest": "contentDigest",
@@ -230,31 +232,31 @@ Array [
   ],
   Array [
     Object {
-      "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-      "ext": ".svg",
-      "extension": "svg",
+      "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+      "ext": ".png",
+      "extension": "png",
       "id": "uuid-from-gatsby",
-      "imageName": undefined,
       "internal": Object {
         "contentDigest": "contentDigest",
-        "type": "jsonImage",
+        "type": "JsonNameImageCard",
       },
+      "name": "Gatsby-Logo",
     },
   ],
   Array [
     Object {
       "blue": false,
-      "c": "./data/Gatsby-Logo.svg",
+      "c": "./data/Gatsby-Logo.png",
       "c-image": Object {
-        "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-        "ext": ".svg",
-        "extension": "svg",
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+        "ext": ".png",
+        "extension": "png",
         "id": "uuid-from-gatsby",
-        "imageName": undefined,
         "internal": Object {
           "contentDigest": "contentDigest",
-          "type": "jsonImage",
+          "type": "JsonNameImageCard",
         },
+        "name": "Gatsby-Logo",
       },
       "children": Array [],
       "funny": "nope",
@@ -278,17 +280,17 @@ Array [
         "children": Array [],
         "funny": "yup",
         "id": "foo",
-        "img": "./data/Gatsby-Logo.svg",
+        "img": "./data/Gatsby-Logo.png",
         "img-image": Object {
-          "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-          "ext": ".svg",
-          "extension": "svg",
+          "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+          "ext": ".png",
+          "extension": "png",
           "id": "uuid-from-gatsby",
-          "imageName": undefined,
           "internal": Object {
             "contentDigest": "contentDigest",
-            "type": "jsonImage",
+            "type": "JsonNameImageCard",
           },
+          "name": "Gatsby-Logo",
         },
         "internal": Object {
           "contentDigest": "contentDigest",
@@ -297,9 +299,10 @@ Array [
         "parent": "whatever",
       },
       "parent": Object {
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "children": Array [],
-        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.svg\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\",\\"c\\":\\"./data/Gatsby-Logo.svg\\"}]",
-        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
+        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.png\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\",\\"c\\":\\"./data/Gatsby-Logo.png\\"}]",
+        "dir": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",
@@ -315,17 +318,17 @@ Array [
     Object {
       "child": Object {
         "blue": false,
-        "c": "./data/Gatsby-Logo.svg",
+        "c": "./data/Gatsby-Logo.png",
         "c-image": Object {
-          "absolutePath": "/Users/eloi/Github/gatsby-transformer-json-withimages/src/data/Gatsby-Logo.svg",
-          "ext": ".svg",
-          "extension": "svg",
+          "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__/data/Gatsby-Logo.png",
+          "ext": ".png",
+          "extension": "png",
           "id": "uuid-from-gatsby",
-          "imageName": undefined,
           "internal": Object {
             "contentDigest": "contentDigest",
-            "type": "jsonImage",
+            "type": "JsonNameImageCard",
           },
+          "name": "Gatsby-Logo",
         },
         "children": Array [],
         "funny": "nope",
@@ -337,9 +340,10 @@ Array [
         "parent": "whatever",
       },
       "parent": Object {
+        "absolutePath": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "children": Array [],
-        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.svg\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\",\\"c\\":\\"./data/Gatsby-Logo.svg\\"}]",
-        "dir": "/var/folders/3x/ytvztchd1_33yv4hnpj2pyd00000gn/T/foo/",
+        "content": "[{\\"id\\":\\"foo\\",\\"blue\\":true,\\"funny\\":\\"yup\\",\\"img\\":\\"./data/Gatsby-Logo.png\\"},{\\"blue\\":false,\\"funny\\":\\"nope\\",\\"c\\":\\"./data/Gatsby-Logo.png\\"}]",
+        "dir": "/Users/eloi/AERQ/gatsby-transformer-json-withimages/src/__tests__",
         "id": "whatever",
         "internal": Object {
           "contentDigest": "whatever",

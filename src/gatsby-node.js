@@ -1,5 +1,7 @@
 const _ = require(`lodash`);
 const path = require(`path`)
+const { createFileNode } = require(`gatsby-source-filesystem/create-file-node`)
+
 
 function unstable_shouldOnCreateNode({ node }) {
   // We only care about JSON content.
@@ -28,14 +30,17 @@ async function onCreateNode(
     }
   }
 
+
+
   function transformObject(obj, id, type) {
-    processImages(obj);
-    const jsonNode = { ...obj,
+    let newContent = processImages(obj);
+
+    const jsonNode = { ...newContent,
       id,
       children: [],
       parent: node.id,
       internal: {
-        contentDigest: createContentDigest(obj),
+        contentDigest: createContentDigest(newContent),
         type
       }
     };
@@ -46,40 +51,62 @@ async function onCreateNode(
     });
   }
 
-  function createImageNode(image, contentType) {
-    const {
-      imageName,
-      ext
-    } = path.parse(image);
-    const absolutePath = path.normalize(path.join(__dirname, image));
-    const data = {
-      imageName,
-      ext,
-      absolutePath,
-      extension: ext.substring(1)
-    };
-    const imageNode = { ...data,
-      id: createNodeId(`card-image-${imageName}`),
-      internal: {
-        type: `jsonImage`,
-        contentDigest: createContentDigest(data)
-      }
-    };
-    actions.createNode(imageNode);
+  async function createImageNode(image) {
+    let imageNode
+
+    const nodeDirectory = path.parse(node.absolutePath).dir
+    const absolutePath = path.resolve(path.join(nodeDirectory, image));
+    console.log(`relative path path ` + image);
+    console.log(`node path ` + nodeDirectory);
+    console.log(`absolutePath path ` + absolutePath);
+
+    const fileNode = await createFileNode(
+        absolutePath,
+        createNodeId,
+        {}
+    )
+    createNode(fileNode, { name: `gatsby-source-filesystem` })
+    imageNode = fileNode
     return imageNode;
   }
 
-  function processImages(data) {
-    _.forOwn(data, function (value, key) {
-      if (_.isObject(data[key])) {
-        processImages(data[key]);
-      } else {
-        const val = String(data[key]);
-        if (val.endsWith(".png") || val.endsWith(".svg") || val.endsWith(".jpeg") || val.endsWith(".jpg")) {
-          data[key + "-image"] = createImageNode(val);
+   function processImages(data, isArray) {
+
+
+    if(isArray) {
+      let retJson = [];
+      Object.entries(data).forEach(entry => {
+        const [key, value] = entry;
+        if (_.isObject(value)) {
+          retJson.push(processImages(value));
+        } else {
+          let pair = {key: value}
+          retJson.push(pair);
+          if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
+            const newKey = key +"-image";
+            let newPair = {newKey: createImageNode(value)};
+            retJson.push(newPair);
+          }
         }
-      }
-    });
+      });
+      return retJson;
+    } else {
+      let retJson = {};
+      Object.entries(data).forEach(entry => {
+        const [key, value] = entry;
+        if(_.isArray(value)) {
+          retJson[key] = processImages(value, true);
+        } else if (_.isObject(value)) {
+          retJson[key] = processImages(value);
+        } else {
+          retJson[key] = value;
+          if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
+            retJson[key +"-image"] = createImageNode(value);
+          }
+        }
+      });
+      return retJson;
+    }
   }
 
   const {

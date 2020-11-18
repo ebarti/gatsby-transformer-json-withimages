@@ -2,3 +2,4 @@
 gatsby-transformer-json-withimages.iml
 node_modules/
 .idea/
+/package-lock.json
