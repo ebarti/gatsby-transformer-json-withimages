@@ -83,8 +83,9 @@ async function onCreateNode(
           let pair = {key: value}
           retJson.push(pair);
           if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-            const newKey = key +"-image";
-            let newPair = {newKey: createImageNode(value)};
+            const newKey = "JsonizedImage";
+            let newPair = {newKey: {}};
+            newPair.newKey = createImageNode(value);
             retJson.push(newPair);
           }
         }
@@ -101,7 +102,9 @@ async function onCreateNode(
         } else {
           retJson[key] = value;
           if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-            retJson[key +"-image"] = createImageNode(value);
+            const newKey = "JsonizedImage";
+            retJson[newKey] = {};
+            retJson[newKey]["img"] = createImageNode(value);
           }
         }
       });
