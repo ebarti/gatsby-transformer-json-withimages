@@ -67,7 +67,7 @@ async function onCreateNode(
         createNodeId,
         {}
     );
-    await actions.createNode(fileNode, { name: `gatsby-source-filesystem` });
+    await createNode(fileNode, { name: `gatsby-source-filesystem` });
     return fileNode;
   }
 
