@@ -83,7 +83,7 @@ async function onCreateNode(
        } else {
          (isArray) ? retJson.push({[key]: value}):retJson[key] = value;
          if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-           const newImageValue = await createImageNode(value);
+           await createImageNode(value);
          }
        }
      }
