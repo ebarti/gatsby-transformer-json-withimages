@@ -32,8 +32,8 @@ async function onCreateNode(
 
 
 
-  function transformObject(obj, id, type) {
-    let newContent = processImages(obj);
+  async function transformObject(obj, id, type) {
+    let newContent = await processImages(obj);
 
     const jsonNode = { ...newContent,
       id,
@@ -52,62 +52,57 @@ async function onCreateNode(
   }
 
   async function createImageNode(image) {
-    let imageNode
-
     const nodeDirectory = path.parse(node.absolutePath).dir
     const absolutePath = path.resolve(path.join(nodeDirectory, image));
-    console.log(`relative path path ` + image);
-    console.log(`node path ` + nodeDirectory);
-    console.log(`absolutePath path ` + absolutePath);
-
+    const {
+      imageName,
+      ext
+    } = path.parse(image);
     const fileNode = await createFileNode(
         absolutePath,
         createNodeId,
         {}
-    )
-    createNode(fileNode, { name: `gatsby-source-filesystem` })
-    imageNode = fileNode
-    return imageNode;
+    );
+    await actions.createNode(fileNode, { name: `gatsby-source-filesystem` });
+    return fileNode;
   }
 
-   function processImages(data, isArray) {
-
-
+   async function processImages(data, isArray) {
     if(isArray) {
       let retJson = [];
-      Object.entries(data).forEach(entry => {
+      for (const entry of Object.entries(data)) {
         const [key, value] = entry;
         if (_.isObject(value)) {
-          retJson.push(processImages(value));
+          const newValue = await processImages(value);
+          retJson.push(newValue);
         } else {
-          let pair = {key: value}
-          retJson.push(pair);
+          retJson.push({[key]: value});
           if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-            const newKey = "JsonizedImage";
-            let newPair = {newKey: {}};
-            newPair.newKey = createImageNode(value);
-            retJson.push(newPair);
+            const newImageValue = await createImageNode(value);
+            retJson.push({"jsonizedImage": newImageValue});
           }
         }
-      });
+      }
       return retJson;
     } else {
       let retJson = {};
-      Object.entries(data).forEach(entry => {
+      for (const entry of Object.entries(data)) {
         const [key, value] = entry;
+
         if(_.isArray(value)) {
-          retJson[key] = processImages(value, true);
+          const newValue = await processImages(value, true);
+          retJson[key] = newValue;
         } else if (_.isObject(value)) {
-          retJson[key] = processImages(value);
+          const newValue = await processImages(value, false);
+          retJson[key] = newValue;
         } else {
           retJson[key] = value;
           if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-            const newKey = "JsonizedImage";
-            retJson[newKey] = {};
-            retJson[newKey]["img"] = createImageNode(value);
+            const newImageValue = await createImageNode(value);
+            retJson["jsonizedImage"] = newImageValue;
           }
         }
-      });
+      }
       return retJson;
     }
   }
@@ -127,15 +122,16 @@ async function onCreateNode(
   }
 
   if (_.isArray(parsedContent)) {
-    parsedContent.forEach((obj, i) => {
-      transformObject(obj, obj.id ? String(obj.id) : createNodeId(`${node.id} [${i}] >>> JSON`), getType({
+    for (const obj of parsedContent) {
+      let i = parsedContent.indexOf(obj);
+      await transformObject(obj, obj.id ? String(obj.id) : createNodeId(`${node.id} [${i}] >>> JSON`), getType({
         node,
         object: obj,
         isArray: true
       }));
-    });
+    }
   } else if (_.isPlainObject(parsedContent)) {
-    transformObject(parsedContent, parsedContent.id ? String(parsedContent.id) : createNodeId(`${node.id} >>> JSON`), getType({
+    await transformObject(parsedContent, parsedContent.id ? String(parsedContent.id) : createNodeId(`${node.id} >>> JSON`), getType({
       node,
       object: parsedContent,
       isArray: false
