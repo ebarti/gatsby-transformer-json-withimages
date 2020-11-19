@@ -15,6 +15,10 @@ async function onCreateNode(
   if (!unstable_shouldOnCreateNode({ node })) {
     return
   }
+  const {
+    createNode,
+    createParentChildLink
+  } = actions;
 
   function getType({ node, object, isArray }) {
     if (pluginOptions && _.isFunction(pluginOptions.typeName)) {
@@ -68,49 +72,26 @@ async function onCreateNode(
   }
 
    async function processImages(data, isArray) {
-    if(isArray) {
-      let retJson = [];
-      for (const entry of Object.entries(data)) {
-        const [key, value] = entry;
-        if (_.isObject(value)) {
-          const newValue = await processImages(value);
-          retJson.push(newValue);
-        } else {
-          retJson.push({[key]: value});
-          if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-            const newImageValue = await createImageNode(value);
-            retJson.push({"jsonizedImage": newImageValue});
-          }
-        }
-      }
-      return retJson;
-    } else {
-      let retJson = {};
-      for (const entry of Object.entries(data)) {
-        const [key, value] = entry;
-
-        if(_.isArray(value)) {
-          const newValue = await processImages(value, true);
-          retJson[key] = newValue;
-        } else if (_.isObject(value)) {
-          const newValue = await processImages(value, false);
-          retJson[key] = newValue;
-        } else {
-          retJson[key] = value;
-          if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
-            const newImageValue = await createImageNode(value);
-            retJson["jsonizedImage"] = newImageValue;
-          }
-        }
-      }
-      return retJson;
-    }
+    let retJson;
+     (isArray) ? retJson=[]:retJson={};
+     for (const entry of Object.entries(data)) {
+       const [key, value] = entry;
+       const valArray = _.isArray(value);
+       if (_.isObject(value)) {
+         const newValue = await processImages(value, _.isArray(value));
+         (isArray) ? retJson.push(newValue):retJson[key] = newValue;
+       } else {
+         (isArray) ? retJson.push({[key]: value}):retJson[key] = value;
+         if (value.endsWith(".png") || value.endsWith(".jpeg") || value.endsWith(".jpg") || value.endsWith(".webp") || value.endsWith(".tif") || value.endsWith(".tiff") || value.endsWith(".svg")) {
+           const newImageValue = await createImageNode(value);
+           (isArray) ? retJson.push({"jsonizedImage": newImageValue}):retJson["jsonizedImage"] = newImageValue;
+         }
+       }
+     }
+     return retJson;
   }
 
-  const {
-    createNode,
-    createParentChildLink
-  } = actions;
+
   const content = await loadNodeContent(node);
   let parsedContent;
 
